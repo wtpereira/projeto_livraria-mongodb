@@ -77,7 +77,7 @@ class CategoriaService:
         except Exception as e:
             print(f'Erro ao excluir categoria! - {e}')
             return
-        
+
         input('Pressione uma tecla para continuar...')
 
     def mostrar_por_id(self):
@@ -90,9 +90,9 @@ class CategoriaService:
             if (cat == None):
                 print('Categoria não encontrada!')
             else:
-                print(f'Id: {cat.id} | Categoria: {cat.nome}')    
+                print(f'Id: {cat.id} | Categoria: {cat.nome}')
         except Exception as e:
             print(f'Erro ao exibir categoria! - {e}')
-            return     
-        
+            return
+
         input('Pressione uma tecla para continuar...')

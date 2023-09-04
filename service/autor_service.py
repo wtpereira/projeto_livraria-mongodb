@@ -80,7 +80,7 @@ class AutorService:
         except Exception as e:
             print(f'Erro ao excluir autor! - {e}')
             return
-        
+
         input('Pressione uma tecla para continuar...')
 
     def mostrar_por_id(self):
@@ -96,6 +96,6 @@ class AutorService:
                 print(f'Id: {aut.id} | Autor: {aut.nome} | Email: {aut.email} | Telefone: {aut.telefone} | Bio: {aut.bio}')
         except Exception as e:
             print(f'Erro ao exibir autor! - {e}')
-            return     
-        
+            return
+
         input('Pressione uma tecla para continuar...')

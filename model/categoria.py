@@ -7,7 +7,7 @@ class Categoria:
     @property
     def id(self) -> int:
         return self.__id
-    
+
     @id.setter
     def id(self, id: int):
         self.__id = id

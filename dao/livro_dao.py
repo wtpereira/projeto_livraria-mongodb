@@ -28,7 +28,7 @@ class LivroDAO:
                 liv = l
                 break
         return liv
-    
+
     def ultimo_id(self) -> int:
         index = len(self.__livros) -1
         if (index == -1):
@@ -36,4 +36,3 @@ class LivroDAO:
         else:
             id = self.__livros[index].id
         return id
-    

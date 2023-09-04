@@ -66,7 +66,7 @@ class LivroService:
             ano = int(input('Digite o ano do livro: '))
             paginas = int(input('Digite a quantidade de páginas do livro: '))
             isbn = input('Digite o isbn do livro: ')
-            
+
             print('Categorias de Livro:')
             lista_categorias = self.__categoria_dao.listar()
             for c in lista_categorias:
@@ -128,7 +128,7 @@ class LivroService:
         except Exception as e:
             print(f'Erro ao excluir livro! - {e}')
             return
-        
+
         input('Pressione uma tecla para continuar...')
 
     def mostrar_por_id(self):
@@ -144,6 +144,6 @@ class LivroService:
                 print(f'Id: {liv.id} | Título: {liv.titulo} | Resumo: {liv.resumo} | Ano: {str(liv.ano)} | Páginas: {str(liv.paginas)} | Isbn: {liv.isbn} | Categoria: {liv.categoria.nome}  | Editora: {liv.editora.nome}  | Autor: {liv.autor.nome}')
         except Exception as e:
             print(f'Erro ao exibir livro! - {e}')
-            return     
-        
+            return
+
         input('Pressione uma tecla para continuar...')

@@ -28,7 +28,7 @@ class EditoraDAO:
                 edt = e
                 break
         return edt
-    
+
     def ultimo_id(self) -> int:
         index = len(self.__editoras) -1
         if (index == -1):
@@ -36,4 +36,3 @@ class EditoraDAO:
         else:
             id = self.__editoras[index].id
         return id
-    

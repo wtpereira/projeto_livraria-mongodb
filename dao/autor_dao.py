@@ -28,7 +28,7 @@ class AutorDAO:
                 aut = a
                 break
         return aut
-    
+
     def ultimo_id(self) -> int:
         index = len(self.__autores) -1
         if (index == -1):
@@ -36,4 +36,3 @@ class AutorDAO:
         else:
             id = self.__autores[index].id
         return id
-    

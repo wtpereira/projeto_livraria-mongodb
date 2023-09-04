@@ -80,7 +80,7 @@ class EditoraService:
         except Exception as e:
             print(f'Erro ao excluir editora! - {e}')
             return
-        
+
         input('Pressione uma tecla para continuar...')
 
     def mostrar_por_id(self):
@@ -96,6 +96,6 @@ class EditoraService:
                 print(f'{edt.id} | {edt.nome} | {edt.endereco} | {edt.telefone}')
         except Exception as e:
             print(f'Erro ao exibir editora! - {e}')
-            return     
-        
+            return
+
         input('Pressione uma tecla para continuar...')
