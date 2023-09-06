@@ -1,39 +1,78 @@
+from bson import ObjectId
 from model.categoria import Categoria
+from database.client_factory import ClientFactory
+
 
 class CategoriaDAO:
 
     def __init__(self):
-        self.__categorias: list[Categoria] = list()
+        self.__client: ClientFactory = ClientFactory()
 
     def listar(self) -> list[Categoria]:
-        return self.__categorias
+        """
+        The `listar` function retrieves a list of `Categoria` objects from a MongoDB
+        database.
+        :return: The method `listar` is returning a list of `Categoria` objects.
+        """
+        categorias = list()
+        client = self.__client.get_client()
+        db = client.livraria
+        for documento in db.categorias.find():
+            cat = Categoria(documento['nome'], documento['_id'])
+            categorias.append(cat)
+
+        client.close()
+        return categorias
 
     def adicionar(self, categoria: Categoria) -> None:
-        self.__categorias.append(categoria)
+        """
+        The function `adicionar` adds a new category to a MongoDB database.
 
-    def remover(self, categoria_id: int) -> bool:
-        encontrado = False
+        :param categoria: The parameter "categoria" is of type "Categoria"
+        :type categoria: Categoria
+        """
+        client = self.__client.get_client()
+        db = client.livraria
+        db.categorias.insert_one({'nome': categoria.nome})
+        client.close()
 
-        for c in self.__categorias:
-            if (c.id == categoria_id):
-                index = self.__categorias.index(c)
-                self.__categorias.pop(index)
-                encontrado = True
-                break
-        return encontrado
+    def remover(self, categoria_id: str) -> bool:
+        """
+        The `remover` function deletes a category from a MongoDB database based on its
+        ID and returns `True` if the deletion was successful, otherwise it returns
+        `False`.
 
-    def buscar_por_id(self, categoria_id) -> Categoria:
+        :param categoria_id: The `categoria_id` parameter is a string that represents
+        the unique identifier of a category in the database
+        :type categoria_id: str
+        :return: a boolean value. It returns True if a document with the given
+        categoria_id is successfully deleted from the database, and False otherwise.
+        """
+        client = self.__client.get_client()
+        db = client.livraria
+        resultado = db.categorias.delete_one({'_id': ObjectId(categoria_id)})
+        client.close()
+        if resultado.deleted_count == 1:
+            return True
+
+        return False
+
+    def buscar_por_id(self, categoria_id: str) -> Categoria:
+        """
+        The function `buscar_por_id` searches for a category by its ID in a MongoDB
+        database and returns a `Categoria` object if found.
+
+        :param categoria_id: The `categoria_id` parameter is a string that represents
+        the ID of the category you want to search for
+        :type categoria_id: str
+        :return: an instance of the `Categoria` class.
+        """
         cat = None
-        for c in self.__categorias:
-            if (c.id == categoria_id):
-                cat = c
-                break
-        return cat
+        client = self.__client.get_client()
+        db = client.livraria
+        documento = db.categorias.find_one({'_id': ObjectId(categoria_id)})
+        if documento:
+            cat = Categoria(documento['nome'], documento['_id'])
 
-    def ultimo_id(self) -> int:
-        index = len(self.__categorias) -1
-        if (index == -1):
-            id = 0
-        else:
-            id = self.__categorias[index].id
-        return id
+        client.close()
+        return cat

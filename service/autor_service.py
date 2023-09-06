@@ -54,12 +54,11 @@ class AutorService:
         print('\nAdicionando autor...')
 
         try:
-            id = self.__autor_dao.ultimo_id() + 1
             nome = input('Digite o nome do autor: ')
             email = input('Digite o email do autor: ')
             telefone = input('Digite o telefone do autor: ')
             bio = input('Digite uma bio reduzida do autor: ')
-            novo_autor = Autor(id, nome, email, telefone, bio)
+            novo_autor = Autor(nome, email, telefone, bio)
             self.__autor_dao.adicionar(novo_autor)
             print('Autor adicionado com sucesso!')
         except Exception as e:
@@ -72,7 +71,7 @@ class AutorService:
         print('\nRemovendo autor...')
 
         try:
-            autor_id = int(input('Digite o ID do autor para excluir: '))
+            autor_id = str(input('Digite o ID do autor para excluir: '))
             if (self.__autor_dao.remover(autor_id)):
                 print('Autor excluído com sucesso!')
             else:
@@ -87,7 +86,7 @@ class AutorService:
         print('\nAutor por Id...')
 
         try:
-            id = int(input('Digite o Id do autor para buscar: '))
+            id = str(input('Digite o Id do autor para buscar: '))
             aut = self.__autor_dao.buscar_por_id(id)
 
             if (aut == None):

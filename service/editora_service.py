@@ -54,11 +54,10 @@ class EditoraService:
         print('\nAdicionando editora...')
 
         try:
-            id = self.__editora_dao.ultimo_id() + 1
             nome = input('Digite o nome da editora: ')
             endereco = input('Digite o endereço da editora: ')
             telefone = input('Digite o telefone da editora: ')
-            nova_editora = Editora(id, nome, endereco, telefone)
+            nova_editora = Editora(nome, endereco, telefone)
 
             self.__editora_dao.adicionar(nova_editora)
             print('Editora adicionada com sucesso!')
@@ -72,7 +71,7 @@ class EditoraService:
         print('\nRemovendo editora...')
 
         try:
-            editora_id = int(input('Digite o ID da excluir para excluir: '))
+            editora_id = str(input('Digite o ID da editora para excluir: '))
             if (self.__editora_dao.remover(editora_id)):
                 print('Editora excluída com sucesso!')
             else:
@@ -87,7 +86,7 @@ class EditoraService:
         print('\Editora por Id...')
 
         try:
-            id = int(input('Digite o Id da editora para buscar: '))
+            id = str(input('Digite o Id da editora para buscar: '))
             edt = self.__editora_dao.buscar_por_id(id)
 
             if (edt == None):
