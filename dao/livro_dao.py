@@ -55,9 +55,9 @@ class LivroDAO:
             'ano': livro.ano,
             'paginas': livro.paginas,
             'isbn': livro.isbn,
-            'categoria_id': str(livro.categoria),
-            'editora_id': str(livro.editora),
-            'autor_id': str(livro.autor.id)
+            'categoria_id': livro.categoria.id,
+            'editora_id': livro.editora.id,
+            'autor_id': livro.autor.id
         })
         client.close()
 
